@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>你想和谁成为同学</title>
+    <script src="./commit.js"></script>
+    <!--vue开发-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="./jquery-3.3.1.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-size:100px;
+        }
+        .bg{
+            display:block;
+            height:100vh;
+            width:100vw;
+            position:fixed;
+        }
+        .edit{
+            width:5.2rem;
+            height:3.16rem;
+            border:.02rem dashed #fff;
+            border-radius:.16rem;
+            font-size:0.4rem;
+            color:#fff;
+        }
+        .name{
+            font-size:0.4rem;
+            margin-top:.32rem;
+            margin-left:.74rem;
+        }
+        .name input{
+            font-size:0.4rem;
+            width:2rem;
+            background-color:#2d4642;
+            border:none;
+            color:#fff;
+            outline: none;
+        }
+        .sex{
+            margin-top:.32rem;
+            margin-left:.74rem;
+            font-size:0.4rem;
+            height:.4rem;
+            line-height:.4rem;
+
+        }
+        .chooseImg{
+            width:.36rem;
+            height:.36rem;
+            vertical-align: middle;
+        }
+        .testBtn{
+            width:3.32rem;
+            height:.64rem;
+            line-height:.64rem;
+            background:rgba(255,255,255,1);
+            border-radius:.16rem;
+            margin-top:.4rem;
+            margin-left:.88rem;
+            font-size:0.36rem;
+            color:#2B413E;
+            text-align: center;
+        }
+        .pen{
+            width:.72rem;
+            height:.36rem;
+        }
+        .inputDeal{
+            background-color: #2C433F;
+        }
+        .flex_col{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position:relative;
+            height:90vh;
+            padding:0.54rem 0 .9rem;
+        }
+        .one{
+            width:3.58rem;
+            height:.54rem;
+            margin-left:-2rem;
+        }
+        .two{
+            width:5.26rem;
+            height:1.44rem;
+        }
+        .three{
+            width:5.4rem;
+            height:2.88rem;
+        }
+        .four{
+            width:4.52rem;
+            height:1.16rem;
+        }
+    </style>
+    <script>
+        document.querySelector('body').addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        })
+    </script>
+</head>
+<body>
+    <img src="./bgpure.png" alt="" class="bg">
+    <div class="flex_col">
+        <img src="./one.png" class="one">
+        <img src="./two.png" class="two">
+        <img src="./three.png" class="three">
+        <img src="./four.png" class="four">
+        <div class="edit inputDeal" >
+            <div class="name">英文名：
+                <!--<img src="./pen.png" alt="" class="pen">-->
+                <input type="text" id="input">
+
+            </div>
+            <div class="sex">性&nbsp;&nbsp;&nbsp;别：男
+                <img src="./choose.png" alt="" class="chooseImg" style="display: none">
+                <img src="./choosed.png" alt="" class="chooseImg">
+                &nbsp;&nbsp;&nbsp;女
+                <img src="./choose.png" alt="" class="chooseImg">
+                <img src="./choosed.png" alt="" class="chooseImg" style="display: none">
+            </div>
+            <!--<div id="abc" style="font-size:10px;">跳转到的位置</div>-->
+            <div class="testBtn">开始测试</div>
+        </div>
+    </div>
+
+</body>
+</html>
