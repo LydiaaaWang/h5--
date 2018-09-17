@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="__PUBLIC__/Active/unit/need/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Tmpactive/termBegins/css/term_begins.css?<php>echo time();</php>">
+    <title>听说你和Ta是同学？</title>
+    <script src="__PUBLIC__/Tmpactive/unit/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/Tmpactive/unit/commit.js"></script>
+    <script src="__PUBLIC__/Tmpactive/unit/vue.min.js"></script>
+    <script src="__PUBLIC__/Active/unit/layer.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        // var app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         message: 'your name'
+        //     }
+        // })
+        // console.log()
+    </script>
+</head>
+<body>
+    <img src="__PUBLIC__/Tmpactive/termBegins/img/bgpure.png" alt="" class="bg">
+    <div class="flex_col">
+        <img src="__PUBLIC__/Tmpactive/termBegins/img/one.png" class="one">
+        <img src="__PUBLIC__/Tmpactive/termBegins/img/two.png" class="two">
+        <img src="__PUBLIC__/Tmpactive/termBegins/img/three.png" class="three">
+        <img src="__PUBLIC__/Tmpactive/termBegins/img/four.png" class="four">
+        <div class="edit inputDeal">
+            <div class="name">英文名：
+                <img src="__PUBLIC__/Tmpactive/termBegins/img/pen.png" alt="" class="pen" onclick="showName();">
+                <input type="text" name="userName" style="display: none" onblur="showPen()" autofocus="autofocus">
+            </div>
+            <div class="sex">性&nbsp;&nbsp;&nbsp;别：男
+                <img src="__PUBLIC__/Tmpactive/termBegins/img/choose.png" alt="" data-type="hide" class="chooseImg" onclick="showChoose($(this),1)">
+                &nbsp;&nbsp;&nbsp;女
+                <img src="__PUBLIC__/Tmpactive/termBegins/img/choose.png" alt="" data-type="hide" class="chooseImg" onclick="showChoose($(this),2)">
+            </div>
+            <input type="hidden" name="sex" value="0">
+            <div class="testBtn" onclick="submitInput()">开始测试</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function showName(){
+        $(".pen").hide();
+        $("input[name='userName']").show();
+    }
+    function showPen(){
+        var text = $("input[name='userName']").val();
+        if ("" == text) {
+            $("input[name='userName']").hide();
+            $(".pen").show();
+        }
+    }
+    function showChoose(e,sex){
+        var type = {show: "choosed",hide:"choose"};
+        var onlineType = e.attr("data-type");
+        onlineType = "show" == onlineType ? "hide" : "show";
+        var img = "/cred/Public/Tmpactive/termBegins/img/";
+        $(".chooseImg").attr("src",img+type.hide+".png");
+        $(".chooseImg").attr("data-type","hide");
+        e.attr("src",img+type[onlineType]+".png");
+        e.attr("data-type",onlineType);
+        $("input[name='sex']").val(sex);
+    }
+    function submitInput(){
+        var userName = $("input[name='userName']").val();
+        var sex = $("input[name='sex']").val();
+        if ('' == userName) {
+            alert("请填写您的名称~");
+            return;
+        }
+        if (1 != sex && 2 != sex) {
+            alert("请选择您的性别~");
+            return;
+        }
+        $.ajax({
+            url: "{:U("term_begins")}",
+            type: 'POST',
+            dataType: 'json',
+            data: {userName: userName, sex: sex},
+            success: function(result){
+                if (result.status==1) {
+                    window.location.href = result.url;
+                }else{
+                    alert(result.info);
+                }
+            }
+        });
+    }
+</script>
+<script>
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: {$signPackage.timestamp},
+        nonceStr : '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    });
+    wx.ready(function () {
+        // 在这里调用 API
+        // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareAppMessage({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.3 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareQQ({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到QQ');
+            },
+            complete: function (res) {
+                // alert(JSON.stringify(res));
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.4 监听“分享到微博”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareWeibo({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到微博');
+            },
+            complete: function (res) {
+                // alert(JSON.stringify(res));
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+    });
+    wx.error(function(res){
+    })
+</script>
+</html>

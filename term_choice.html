@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>听说你和Ta是同学？</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Tmpactive/termBegins/css/term_choice.css">
+    <script src="__PUBLIC__/Tmpactive/unit/jquery-3.2.1.min.js"></script>
+    <script src="__PUBLIC__/Tmpactive/unit/commit.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        var answer = {
+            'user_name'  : "{$_GET['name']}",
+            'sex'       : "{$_GET['sex']}"
+        };
+        var list = {
+            1 : "one",
+            2 : "two",
+            3 : "three"
+        }
+        function choice_answer(e,position,num){
+            answer[list[position]] = num;
+            e.addClass("aws_choosed");
+            if (position < 3) {
+                $("#que"+position).hide(1000);
+                $("#que"+(position+1)).show(1000);
+            }
+            if (position == 3) {
+                $.ajax({
+                    url: "{:U("term_choice")}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: answer,
+                    success: function(result){
+                        if (result.status==1) {
+                            window.location.href = result.url;
+                        }else{
+                            alert(result.info);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<img src="__PUBLIC__/Tmpactive/termBegins/img/q_que.png" alt="" class="bg">
+<div class="edit" id="que1">
+    <div class="que">问题一</div>
+    <img src="__PUBLIC__/Tmpactive/termBegins/img/queImg.png" alt="" class="queImg">
+    <div class="tit">当年高考让你最后悔的事情是什么？</div>
+    <div class="aws" onclick="choice_answer($(this),1,'A')">
+        A：考试没有三短一长选最长
+    </div>
+    <div class="aws" onclick="choice_answer($(this),1,'B')">
+        B：考试没有多选C
+    </div>
+    <div class="aws" onclick="choice_answer($(this),1,'C')">
+        C：没让妈妈穿旗袍送考
+    </div>
+    <div class="aws" onclick="choice_answer($(this),1,'D')">
+        D：高考前焚了书
+    </div>
+</div>
+<div class="edit" id="que2" style="display: none;">
+    <div class="que">问题二</div>
+    <img src="__PUBLIC__/Tmpactive/termBegins/img/queImg2.png" alt="" class="queImg">
+    <div class="tit">最想留下回忆的方式是什么呢？</div>
+    <div class="aws" onclick="choice_answer($(this),2,'A')">
+        A：把握当下回忆什么
+    </div>
+    <div class="aws" onclick="choice_answer($(this),2,'B')">
+        B：留什么回忆留人啊
+    </div>
+    <div class="aws" onclick="choice_answer($(this),2,'C')">
+        C：拍个照留念下
+    </div>
+    <div class="aws" onclick="choice_answer($(this),2,'D')">
+        D：别说了，吻ta
+    </div>
+</div>
+<div class="edit" id="que3" style="display: none;">
+    <div class="que">问题三</div>
+    <img src="__PUBLIC__/Tmpactive/termBegins/img/queImg3.png" alt="" class="queImg">
+    <div class="tit">给你的一个天赋，你最想拥有什么？</div>
+    <div class="aws" onclick="choice_answer($(this),3,'A')" >
+        A：能说会道，辩论高手
+    </div>
+    <div class="aws " onclick="choice_answer($(this),3,'B')">
+        B：能唱会跳，偶像歌手
+    </div>
+    <div class="aws" onclick="choice_answer($(this),3,'C')">
+        C：能哭能笑，实力演员
+    </div>
+    <div class="aws" onclick="choice_answer($(this),3,'D')">
+        D：会学会考，逢考必过
+    </div>
+</div>
+</body>
+</html>
+<script>
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: {$signPackage.timestamp},
+        nonceStr : '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: ['checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'onMenuShareQZone']
+    });
+    wx.ready(function () {
+        // 在这里调用 API
+        // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareAppMessage({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.3 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareQQ({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到QQ');
+            },
+            complete: function (res) {
+                // alert(JSON.stringify(res));
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        // 2.4 监听“分享到微博”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareWeibo({
+            title: '听说你和Ta是同学？',
+            desc: '任时光匆匆流去我只想回到过去!',
+            link: '{$share.url}',
+            imgUrl: '{$share.img}',
+            trigger: function (res) {
+                // alert('用户点击分享到微博');
+            },
+            complete: function (res) {
+                // alert(JSON.stringify(res));
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+    });
+    wx.error(function(res){
+    })
+</script>

@@ -1,0 +1,53 @@
+*{
+    margin:0;
+    padding:0;
+    font-size:100px;
+}
+.bg{
+    display:block;
+    /*height:100vh;*/
+    width:100vw;
+    position:fixed;
+}
+.edit{
+    position:absolute;
+    width:5.2rem;
+    height:9.18rem;
+    border:.02rem dashed #fff;
+    border-radius:.16rem;
+    margin-top:1.54rem;
+    margin-left:1.22rem;
+    font-size:0.4rem;
+    color:#fff;
+}
+.que{
+    font-size:0.48rem;
+    margin:.2rem 0 0 .2rem;
+}
+.queImg{
+    width:4.74rem;
+    height:2.56rem;
+    margin:.3rem 0 0 .2rem;
+}
+.tit{
+    font-size:0.36rem;
+    margin:.2rem 0 .56rem .24rem;
+}
+.aws{
+    font-size:0.36rem;
+    margin-left:.2rem;
+    margin-bottom:.2rem;
+    height:.64rem;
+    line-height:.64rem;
+}
+.aws_choosed{
+    width:4.88rem;
+    height:.64rem;
+    line-height:.64rem;
+    background-color: #fff;
+    color:#2A3E3B;
+    border-radius:.16rem;
+    position: relative;
+    left: -0.1rem;
+    padding-left: .1rem;
+}
