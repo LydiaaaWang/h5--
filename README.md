@@ -4,7 +4,7 @@
 
 ![效果图查看：](http://p52hnvln4.bkt.clouddn.com/Animation.gif)
 
-上图点开就可以看动图。
+上图点开就可以看动图。或者自己复制链接去看图：http://p52hnvln4.bkt.clouddn.com/Animation.gif
 
 ###代码改进
 
